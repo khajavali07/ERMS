@@ -1,0 +1,30 @@
+<div class="theme-container" [class.dark]="colorMode()" [class.light]="!colorMode()">
+  <h2>Employee Details</h2>
+  @for(emp of employees();track emp.id){
+    <div class="employee-row">
+      <span>{{emp.id}} {{emp.name}}</span>
+      <button (click)="deleteEmployee(emp)">Delete</button>
+      <button (click)="EditEmployee(emp)">Edit</button>
+    </div>
+  }
+  <br>
+  <button (click)="addEmployee()">Add Employee</button>
+  @if(showPopUp()){
+    <div class="popup">
+      <form [formGroup]="employeeForm">
+        <input type="text" formControlName="id" placeholder="Id"><br>
+        <input type="text" formControlName="name" placeholder="Name"><br>
+        <input type="text" formControlName="role" placeholder="Role"><br>
+        <input type="text" formControlName="email" placeholder="Email"><br>
+        <button (click)="saveEmployee()">save</button>
+      </form>
+    </div>
+  }
+
+  <mat-slide-toggle [checked]="colorMode()" (change)="toggleChange($event)"
+    [style.color]="colorMode() ? 'white' : 'black'">
+    <span [style.color]="colorMode() ? 'white' : 'black'">
+      {{ colorMode() ? 'Dark' : 'Light' }} Theme
+    </span>
+  </mat-slide-toggle>
+</div>
