@@ -1,0 +1,15 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+nav ul{
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    width: 125px;
+}
+.active{
+  color:red !important;
+  text-decoration: underline !important;
+}

@@ -1,1 +1,8 @@
-<app-employees></app-employees>
+<nav>
+  <img src="models/dhoni.jpg" alt="Logo">
+  <ul>
+    <li><a routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="/">Home</a></li>
+    <li><a  routerLinkActive="active" routerLink="/departments">Departments</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
