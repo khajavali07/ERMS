@@ -1,10 +1,25 @@
 import { Routes } from '@angular/router';
 import { Departments } from './departments/departments';
-import { Home } from './home/home';
 import { PageNotFound } from './page-not-found/page-not-found';
+import { Login } from './login/login';
+import { Settings } from './settings/settings';
+import { Payroll } from './payroll/payroll';
+import { Dashboard } from './dashboard/dashboard';
+import { Layout } from './layout/layout';
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'departments', component: Departments },
-  {path:'**',component:PageNotFound}
+  //Login
+  {path:'login',component:Login},
+  //Main Application Layout
+  {path:'',component:Layout,children:[
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    {path:'dashboard',component:Dashboard},
+    { path: 'departments', component: Departments },
+    { path: 'dashboard', component: Dashboard },
+    { path: 'login', component: Login },
+    { path: 'settings', component: Settings },
+    { path: 'payroll', component: Payroll }
+  ]},
+  //In-valid URL
+  { path: '**', component: PageNotFound }
 ];

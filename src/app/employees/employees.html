@@ -3,12 +3,12 @@
   @for(emp of employees();track emp.id){
     <div class="employee-row">
       <span>{{emp.id}} {{emp.name}}</span>
-      <button (click)="deleteEmployee(emp)">Delete</button>
-      <button (click)="EditEmployee(emp)">Edit</button>
+      <button type="button" (click)="deleteEmployee(emp)">Delete</button>
+      <button type="button" (click)="EditEmployee(emp)">Edit</button>
     </div>
   }
   <br>
-  <button (click)="addEmployee()">Add Employee</button>
+  <button type="button" (click)="addEmployee()">Add Employee</button>
   @if(showPopUp()){
     <div class="popup">
       <form [formGroup]="employeeForm">
@@ -16,7 +16,7 @@
         <input type="text" formControlName="name" placeholder="Name"><br>
         <input type="text" formControlName="role" placeholder="Role"><br>
         <input type="text" formControlName="email" placeholder="Email"><br>
-        <button (click)="saveEmployee()">save</button>
+        <button type="button" (click)="saveEmployee()">save</button>
       </form>
     </div>
   }
