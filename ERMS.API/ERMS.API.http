@@ -1,6 +1,82 @@
 @ERMS.API_HostAddress = http://localhost:5100
 
-GET {{ERMS.API_HostAddress}}/weatherforecast/
+### Get All Active Employees
+GET {{ERMS.API_HostAddress}}/api/employees
 Accept: application/json
 
 ###
+
+### Get Active Employee By ID
+GET {{ERMS.API_HostAddress}}/api/employees/1
+Accept: application/json
+
+###
+
+### Create Employee
+POST {{ERMS.API_HostAddress}}/api/employees
+Content-Type: application/json
+
+{
+  "employeeCode": "EMP0001",
+  "firstName": "John",
+  "lastName": "Smith",
+  "dateOfBirth": "1995-05-15",
+  "gender": "Male",
+  "maritalStatus": "Single",
+  "bloodGroup": "O+",
+  "profilePhoto": null,
+  "email": "john.smith@example.com",
+  "phone": "9876543210",
+  "emergencyContact": "9876500000",
+  "address": "123 Main Street",
+  "city": "Hyderabad",
+  "state": "Telangana",
+  "pincode": "500001",
+  "departmentId": null,
+  "designation": "Software Engineer",
+  "managerId": null,
+  "joiningDate": "2026-09-05",
+  "employmentType": "Full-Time",
+  "salary": 60000,
+  "shift": "General",
+  "workLocation": "Hyderabad",
+  "isActive": true
+}
+
+###
+
+### Update Employee
+PUT {{ERMS.API_HostAddress}}/api/employees/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "employeeCode": "EMP0001",
+  "firstName": "John",
+  "lastName": "Smith Updated",
+  "dateOfBirth": "1995-05-15",
+  "gender": "Male",
+  "maritalStatus": "Single",
+  "bloodGroup": "O+",
+  "profilePhoto": null,
+  "email": "john.updated@example.com",
+  "phone": "9876543210",
+  "emergencyContact": "9876500000",
+  "address": "456 Updated Street",
+  "city": "Hyderabad",
+  "state": "Telangana",
+  "pincode": "500002",
+  "departmentId": null,
+  "designation": "Senior Software Engineer",
+  "managerId": null,
+  "joiningDate": "2026-09-05",
+  "employmentType": "Full-Time",
+  "salary": 75000,
+  "shift": "General",
+  "workLocation": "Hyderabad"
+}
+
+###
+
+### Deactivate Employee
+DELETE {{ERMS.API_HostAddress}}/api/employees/1

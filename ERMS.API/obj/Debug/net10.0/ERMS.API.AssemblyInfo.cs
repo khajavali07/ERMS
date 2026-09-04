@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ERMS.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8e764944a9bf428c80d832b9d823d29b3f3c76cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a8fc1849974cf5dfad75a3686be2820b6f1b74d")]
 [assembly: System.Reflection.AssemblyProductAttribute("ERMS.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ERMS.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
