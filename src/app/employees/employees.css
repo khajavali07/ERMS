@@ -1,0 +1,49 @@
+.theme-container {
+  min-height: 100vh;
+  padding: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-container.light {
+  background-color: white;
+  color: black;
+}
+
+.theme-container.dark {
+  background-color: black;
+  color: white;
+}
+
+.employee-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+button {
+  cursor: pointer;
+  margin:0 auto;
+}
+
+.popup {
+  margin-top: 1rem;
+  margin-bottom:1rem;
+  padding: 1rem;
+  border: 1px solid currentColor;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+}
+
+button {
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+  padding: 0.5rem 1rem;
+}
