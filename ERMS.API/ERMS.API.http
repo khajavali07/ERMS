@@ -7,50 +7,49 @@ Accept: application/json
 ###
 
 ### Get Active Employee By ID
-GET {{ERMS.API_HostAddress}}/api/employees/1
+GET {{ERMS.API_HostAddress}}/api/employees/6
 Accept: application/json
 
 ###
 
 ### Create Employee
+### Create Employee
 POST {{ERMS.API_HostAddress}}/api/employees
 Content-Type: application/json
 
 {
-  "employeeCode": "EMP0001",
-  "firstName": "John",
-  "lastName": "Smith",
-  "dateOfBirth": "1995-05-15",
+  "employeeCode": "EMP0002",
+  "firstName": "David",
+  "lastName": "Wilson",
+  "dateOfBirth": "1994-08-20",
   "gender": "Male",
-  "maritalStatus": "Single",
-  "bloodGroup": "O+",
+  "maritalStatus": "Married",
+  "bloodGroup": "A+",
   "profilePhoto": null,
-  "email": "john.smith@example.com",
-  "phone": "9876543210",
-  "emergencyContact": "9876500000",
-  "address": "123 Main Street",
+  "email": "david.wilson@example.com",
+  "phone": "9876543211",
+  "emergencyContact": "9876500001",
+  "address": "456 Main Street",
   "city": "Hyderabad",
   "state": "Telangana",
-  "pincode": "500001",
+  "pincode": "500002",
   "departmentId": null,
   "designation": "Software Engineer",
   "managerId": null,
-  "joiningDate": "2026-09-05",
+  "joiningDate": "2026-09-06",
   "employmentType": "Full-Time",
-  "salary": 60000,
+  "salary": 65000,
   "shift": "General",
-  "workLocation": "Hyderabad",
-  "isActive": true
+  "workLocation": "Hyderabad"
 }
 
 ###
 
 ### Update Employee
-PUT {{ERMS.API_HostAddress}}/api/employees/1
+PUT {{ERMS.API_HostAddress}}/api/employees/6
 Content-Type: application/json
 
 {
-  "id": 1,
   "employeeCode": "EMP0001",
   "firstName": "John",
   "lastName": "Smith Updated",
@@ -79,4 +78,4 @@ Content-Type: application/json
 ###
 
 ### Deactivate Employee
-DELETE {{ERMS.API_HostAddress}}/api/employees/1
+DELETE {{ERMS.API_HostAddress}}/api/employees/6

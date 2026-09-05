@@ -1,5 +1,6 @@
 using ERMS.API.Data;
 using ERMS.API.Models;
+using ERMS.API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,29 +48,57 @@ public class EmployeesController : ControllerBase
   // POST: api/employees
   // Creates a new employee
   [HttpPost]
-  public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+  public async Task<ActionResult<Employee>> CreateEmployee( CreateEmployeeDto employee)
   {
-    _context.Employees.Add(employee);
+    var newEmployee = new Employee
+    {
+      EmployeeCode = employee.EmployeeCode,
+      FirstName = employee.FirstName,
+      LastName = employee.LastName,
+      DateOfBirth = employee.DateOfBirth,
+      Gender = employee.Gender,
+      MaritalStatus = employee.MaritalStatus,
+      BloodGroup = employee.BloodGroup,
+      ProfilePhoto = employee.ProfilePhoto,
+
+      Email = employee.Email,
+      Phone = employee.Phone,
+      EmergencyContact = employee.EmergencyContact,
+      Address = employee.Address,
+      City = employee.City,
+      State = employee.State,
+      Pincode = employee.Pincode,
+
+      DepartmentId = employee.DepartmentId,
+      Designation = employee.Designation,
+      ManagerId = employee.ManagerId,
+      JoiningDate = employee.JoiningDate,
+      EmploymentType = employee.EmploymentType,
+      Salary = employee.Salary,
+      Shift = employee.Shift,
+      WorkLocation = employee.WorkLocation,
+
+      IsActive = true
+    };
+
+    _context.Employees.Add(newEmployee);
 
     await _context.SaveChangesAsync();
 
     return CreatedAtAction(
         nameof(GetEmployee),
-        new { id = employee.Id },
-        employee
+        new { id = newEmployee.Id },
+        newEmployee
     );
   }
 
   // PUT: api/employees/{id}
   // Updates an employee only if they are active
   [HttpPut("{id}")]
-  public async Task<IActionResult> UpdateEmployee(int id, Employee employee)
+  public async Task<IActionResult> UpdateEmployee(
+      int id,
+      UpdateEmployeeDto employee)
   {
-    if (id != employee.Id)
-    {
-      return BadRequest();
-    }
-
     var existingEmployee = await _context.Employees
         .FirstOrDefaultAsync(e => e.Id == id && e.IsActive);
 
