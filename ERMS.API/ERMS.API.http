@@ -79,3 +79,41 @@ Content-Type: application/json
 
 ### Deactivate Employee
 DELETE {{ERMS.API_HostAddress}}/api/employees/6
+###
+
+### Get All Departments
+GET {{ERMS.API_HostAddress}}/api/departments
+Accept: application/json
+
+###
+
+### Get Department By ID
+GET {{ERMS.API_HostAddress}}/api/departments/1
+Accept: application/json
+
+###
+
+### Create Department
+POST {{ERMS.API_HostAddress}}/api/departments
+Content-Type: application/json
+
+{
+  "name": "Information Technology",
+  "head": "John Smith"
+}
+
+###
+
+### Update Department
+PUT {{ERMS.API_HostAddress}}/api/departments/1
+Content-Type: application/json
+
+{
+  "name": "Human Resources",
+  "head": "David Wilson"
+}
+
+###
+
+### Delete Department
+DELETE {{ERMS.API_HostAddress}}/api/departments/1
