@@ -6,6 +6,7 @@ import { Settings } from './settings/settings';
 import { Payroll } from './payroll/payroll';
 import { Dashboard } from './dashboard/dashboard';
 import { Layout } from './layout/layout';
+import { Employees } from './employees/employees';
 
 export const routes: Routes = [
   //Login
@@ -13,7 +14,8 @@ export const routes: Routes = [
   //Main Application Layout
   {path:'',component:Layout,children:[
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    {path:'dashboard',component:Dashboard},
+    { path:'dashboard',component:Dashboard},
+    { path:'employees',component:Employees},
     { path: 'departments', component: Departments },
     { path: 'dashboard', component: Dashboard },
     { path: 'login', component: Login },

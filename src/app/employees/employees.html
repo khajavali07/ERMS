@@ -1,30 +1,64 @@
 <div class="theme-container" [class.dark]="colorMode()" [class.light]="!colorMode()">
   <h2>Employee Details</h2>
-  @for(emp of employees();track emp.id){
-    <div class="employee-row">
-      <span>{{emp.id}} {{emp.name}}</span>
-      <button type="button" (click)="deleteEmployee(emp)">Delete</button>
-      <button type="button" (click)="EditEmployee(emp)">Edit</button>
-    </div>
-  }
+  <div class="employee-row">
+    <table>
+      <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </thead>
+      <tbody>
+        @for(emp of employees();track emp.id){
+          <tr>
+            <td>{{emp.id}}</td>
+            <td>{{emp.firstName}} {{emp.lastName}}</td>
+            <td>{{emp.designation}}</td>
+            <td>{{emp.email}}</td>
+            <td><button type="button" (click)="editEmployee(emp)">Edit</button></td>
+            <td><button type="button" (click)="deleteEmployee(emp)">Delete</button></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+      <!-- <span>
+        {{emp.id}}
+        {{emp.firstName}}
+        {{emp.lastName}}
+        - {{emp.designation}}
+        - {{emp.email}}
+      </span>
+      <button type="button" (click)="editEmployee(emp)">Edit</button>
+      <button type="button" (click)="deleteEmployee(emp)">Delete</button> -->
+  </div>
   <br>
   <button type="button" (click)="addEmployee()">Add Employee</button>
-  @if(showPopUp()){
+  @if(showPopup()){
     <div class="popup">
       <form [formGroup]="employeeForm">
-        <input type="text" formControlName="id" placeholder="Id"><br>
-        <input type="text" formControlName="name" placeholder="Name"><br>
-        <input type="text" formControlName="role" placeholder="Role"><br>
-        <input type="text" formControlName="email" placeholder="Email"><br>
-        <button type="button" (click)="saveEmployee()">save</button>
+        <input type="text" formControlName="employeeCode" placeholder="Employee Code">
+        <br>
+        <input type="text" formControlName="firstName" placeholder="First Name">
+        <br>
+        <input type="text" formControlName="lastName" placeholder="Last Name">
+        <br>
+        <input type="text" formControlName="designation" placeholder="Designation">
+        <br>
+        <input type="text" formControlName="email" placeholder="Email">
+        <br>
+        <button type="button" (click)="saveEmployee()">
+          save
+        </button>
       </form>
     </div>
   }
 
   <mat-slide-toggle [checked]="colorMode()" (change)="toggleChange($event)"
-    [style.color]="colorMode() ? 'white' : 'black'">
-    <span [style.color]="colorMode() ? 'white' : 'black'">
-      {{ colorMode() ? 'Dark' : 'Light' }} Theme
+    [style.color]="colorMode() ? 'black' : 'white'">
+    <span [style.color]="colorMode() ? 'white':'black'">
+      {{ colorMode() ? 'Light' : 'Dark' }} Theme
     </span>
   </mat-slide-toggle>
 </div>
