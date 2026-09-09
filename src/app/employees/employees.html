@@ -3,12 +3,14 @@
   <div class="employee-row">
     <table>
       <thead>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Email</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
       </thead>
       <tbody>
         @for(emp of employees();track emp.id){
@@ -40,13 +42,62 @@
       <form [formGroup]="employeeForm">
         <input type="text" formControlName="employeeCode" placeholder="Employee Code">
         <br>
+        <!-- personal Information -->
+
         <input type="text" formControlName="firstName" placeholder="First Name">
         <br>
         <input type="text" formControlName="lastName" placeholder="Last Name">
         <br>
+        <input type="date" formControlName="dateOfBirth" placeholder="Date Of Birth">
+        <br>
+        <input type="text" formControlName="gender" placeholder="Gender">
+        <br>
+        <input type="text" formControlName="maritalStatus" placeholder="Marital Status">
+        <br>
+        <input type="text" formControlName="bloodGroup" placeholder="Blood Group">
+        <br>
+        <input type="text" formControlName="profilePhoto" placeholder="Profile Picture">
+        <br>
+
+        <!-- contact Information -->
+
+
+        <input type="email" formControlName="email" placeholder="Email">
+        <br>
+        <input type="tel" formControlName="phone" placeholder="Phone Number">
+        <br>
+        <input type="tel" formControlName="emergencyContact" placeholder="Emergency Contact Number">
+        <br>
+        <input type="text" formControlName="address" placeholder="Address">
+        <br>
+        <input type="text" formControlName="city" placeholder="City">
+        <br>
+        <input type="text" formControlName="state" placeholder="State">
+        <br>
+        <input type="text" formControlName="pincode" placeholder="Pincode">
+        <br>
+
+        <!-- proffesional Information -->
+        <select name="department" id="selectedDepartment" aria-label="Department" formControlName="departmentId">
+          <option [ngValue]="null" disabled>Select Department</option>
+          @for(dept of departments();track dept.id){
+            <option [value]="dept.id">{{dept.name}}</option>
+          }
+        </select>
+        <br>
         <input type="text" formControlName="designation" placeholder="Designation">
         <br>
-        <input type="text" formControlName="email" placeholder="Email">
+        <input type="number" formControlName="managerId" placeholder="Manager ID">
+        <br>
+        <input type="date" formControlName="joiningDate" placeholder="Joining Date">
+        <br>
+        <input type="text" formControlName="employmentType" placeholder="Employment Type">
+        <br>
+        <input type="number" formControlName="salary" placeholder="Salary">
+        <br>
+        <input type="text" formControlName="shift" placeholder="Shift">
+        <br>
+        <input type="text" formControlName="workLocation" placeholder="Work Location">
         <br>
         <button type="button" (click)="saveEmployee()">
           save
