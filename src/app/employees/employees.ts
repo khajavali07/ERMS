@@ -4,6 +4,8 @@ import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slid
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../services/employee.services';
+import { departmentService } from '../services/department.services';
+import { department } from '../models/department.model';
 
 @Component({
   selector: 'app-employees',
@@ -15,7 +17,9 @@ import { EmployeeService } from '../services/employee.services';
 export class Employees implements OnInit{
   mode = signal<'add'|'edit'>('add');
 
-  employees = signal<Employee[]>([])
+  employees = signal<Employee[]>([]);
+
+  departments = signal<department[]>([]);
 
   colorMode = signal<boolean>(false);
 
@@ -25,17 +29,45 @@ export class Employees implements OnInit{
 
   employeeForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private employeeService: EmployeeService ) {
+  constructor(
+    private fb: FormBuilder,
+    private employeeService: EmployeeService,
+    private departmentService: departmentService
+  ){
     this.employeeForm = this.fb.group({
-      employeeCode: [0, Validators.required],
+      //personal Information
+      employeeCode: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      dateOfBirth:[''],
+      gender:[''],
+      maritalStatus:[''],
+      bloodGroup:[''],
+      profilePhoto:[''],
+
+      //contact information
       email: ['', [Validators.required, Validators.email]],
-      designation:['',Validators.required]
+      phone:[''],
+      emergencyContact:[''],
+      address:[''],
+      city:[''],
+      state:[''],
+      pincode:[''],
+
+      //proffesional information
+      departmentId:[''],
+      designation:['',Validators.required],
+      managerId:[''],
+      joiningDate:[''],
+      employmentType:[''],
+      salary:[''],
+      shift:[''],
+      workLocation:['']
     });
   }
   ngOnInit():void{
     this.loadEmployees();
+    this.loadDepartments();
   }
 
   loadEmployees():void{
@@ -45,6 +77,17 @@ export class Employees implements OnInit{
       },
       error:(error)=>{
         console.error("Error while loading Employees ",error);
+      }
+    })
+  }
+
+  loadDepartments():void{
+    this.departmentService.getDepartments().subscribe({
+      next:(data)=>{
+        this.departments.set(data);
+      },
+      error:(error)=>{
+        console.error("error while Loading departments ",error);
       }
     })
   }
@@ -68,6 +111,7 @@ export class Employees implements OnInit{
     }
 
     const employee = this.employeeForm.value;
+    console.log('Employee being sent:', employee);
 
     if(this.mode()==='add'){
       this.employeeService.createEmployee(employee).subscribe({
@@ -108,7 +152,25 @@ export class Employees implements OnInit{
       firstName:emp.firstName,
       lastName:emp.lastName,
       email:emp.email,
-      designation:emp.designation
+      dateOfBirth:emp.dateOfBirth?.split('T')[0],
+      gender:emp.gender,
+      maritalStatus:emp.maritalStatus,
+      bloodGroup:emp.bloodGroup,
+      profilePhoto:emp.profilePhoto,
+      phone:emp.phone,
+      emergencyContact:emp.emergencyContact,
+      address:emp.address,
+      city:emp.city,
+      state:emp.state,
+      pincode:emp.pincode,
+      departmentId:emp.departmentId,
+      designation:emp.designation,
+      managerId:emp.managerId,
+      joiningDate:emp.joiningDate?.split('T')[0],
+      employmentType:emp.employmentType,
+      salary:emp.salary,
+      workLocation:emp.workLocation,
+      shift:emp.shift
     });
     this.showPopup.set(true);
   }
