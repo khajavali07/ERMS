@@ -50,11 +50,26 @@
         <br>
         <input type="date" formControlName="dateOfBirth" placeholder="Date Of Birth">
         <br>
-        <input type="text" formControlName="gender" placeholder="Gender">
+        <select name="gender" id="gender" aria-label="Select your gender" formControlName="gender">
+          <option [ngValue]="null" disabled>Select Your Gender</option>
+          @for(gender of genders;track gender){
+            <option [value]="gender">{{ gender }}</option>
+          }
+        </select>
         <br>
-        <input type="text" formControlName="maritalStatus" placeholder="Marital Status">
+        <select name="maritalStatus" id="marital-status" aria-label="Select your marital status" formControlName="maritalStatus">
+          <option [ngValue]="null" disabled>Select Your Marital Status</option>
+          @for(type of maritalStatuses;track type){
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
         <br>
-        <input type="text" formControlName="bloodGroup" placeholder="Blood Group">
+        <select name="bloodGroup" id="blood-group" aria-label="Select your blood group" formControlName="bloodGroup">
+          <option [ngValue]="null" disabled>Select Your Blood Group</option>
+          @for(type of bloodGroups;track type){
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
         <br>
         <input type="text" formControlName="profilePhoto" placeholder="Profile Picture">
         <br>
@@ -87,7 +102,15 @@
         <br>
         <input type="text" formControlName="designation" placeholder="Designation">
         <br>
-        <input type="number" formControlName="managerId" placeholder="Manager ID">
+        <!-- manager dropdown -->
+        <select name="Manager" id="ManagerSelection" formControlName="managerId" aria-label="manager">
+          <option [ngValue]="null" disabled>Select Your Manager</option>
+          @for(manager of employees();track manager.id){
+            @if(manager.id!=editingEmployee()?.id){
+            <option [value]="manager.id">{{manager.firstName}} {{manager.lastName}}</option>
+            }
+          }
+        </select>
         <br>
         <input type="date" formControlName="joiningDate" placeholder="Joining Date">
         <br>
@@ -95,9 +118,19 @@
         <br>
         <input type="number" formControlName="salary" placeholder="Salary">
         <br>
-        <input type="text" formControlName="shift" placeholder="Shift">
+        <select name="shift" id="shift" aria-label="Work Shift" formControlName="shift">
+          <option [ngValue]="null" disabled>Select Work Shift</option>
+          @for(shift of shifts;track shift){
+            <option [value]="shift">{{shift}}</option>
+          }
+        </select>
         <br>
-        <input type="text" formControlName="workLocation" placeholder="Work Location">
+        <select name="workLocation" id="workLocation" aria-label="Work Location" formControlName="workLocation">
+          <option [ngValue]="null"disabled>Select Work Location</option>
+          @for(location of workLocations;track location){
+            <option [value]="location">{{location}}</option>
+          }
+        </select>
         <br>
         <button type="button" (click)="saveEmployee()">
           save
