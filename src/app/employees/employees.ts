@@ -15,6 +15,49 @@ import { department } from '../models/department.model';
   styleUrls: ['./employees.css'],
 })
 export class Employees implements OnInit{
+  genders = [
+  'Male',
+  'Female',
+  'Other'
+];
+
+maritalStatuses = [
+  'Single',
+  'Married',
+  'Divorced',
+  'Widowed'
+];
+
+bloodGroups = [
+  'A+',
+  'A-',
+  'B+',
+  'B-',
+  'AB+',
+  'AB-',
+  'O+',
+  'O-'
+];
+
+employmentTypes = [
+  'Full Time',
+  'Part Time',
+  'Contract',
+  'Intern'
+];
+
+shifts = [
+  'Morning',
+  'Afternoon',
+  'Night'
+];
+
+workLocations = [
+  'Office',
+  'Remote',
+  'Hybrid'
+];
+
   mode = signal<'add'|'edit'>('add');
 
   employees = signal<Employee[]>([]);
