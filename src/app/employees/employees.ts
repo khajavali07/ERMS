@@ -71,7 +71,10 @@ workLocations = [
   editingEmployee= signal<Employee | null>(null);
 
   employeeForm: FormGroup;
-
+  isInvalid(fieldName:string): boolean{
+    const field = this.employeeForm.get(fieldName);
+    return !!field&&field.invalid && (field.touched || field.dirty);
+  }
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeService,
@@ -80,32 +83,32 @@ workLocations = [
     this.employeeForm = this.fb.group({
       //personal Information
       employeeCode: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(40)]],
+      lastName: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
       dateOfBirth:[''],
-      gender:[''],
+      gender:['',Validators.required],
       maritalStatus:[''],
       bloodGroup:[''],
       profilePhoto:[''],
 
       //contact information
       email: ['', [Validators.required, Validators.email]],
-      phone:[''],
-      emergencyContact:[''],
+      phone:['',[Validators.pattern(/^[0-9]{10}$/)]],
+      emergencyContact:['',[Validators.pattern(/^[0-9]{10}$/)]],
       address:[''],
       city:[''],
       state:[''],
-      pincode:[''],
+      pincode:['',[Validators.pattern(/^[0-9]{6}$/)]],
 
       //proffesional information
-      departmentId:[''],
-      designation:['',Validators.required],
+      departmentId:['',[Validators.required]],
+      designation:['',[Validators.required,Validators.minLength(2)]],
       managerId:[''],
-      joiningDate:[''],
-      employmentType:[''],
-      salary:[''],
-      shift:[''],
-      workLocation:['']
+      joiningDate:['',[Validators.required]],
+      employmentType:['',[Validators.required]],
+      salary:['',[Validators.min(0)]],
+      shift:['',[Validators.required]],
+      workLocation:['',[Validators.required]]
     });
   }
   ngOnInit():void{
@@ -133,6 +136,10 @@ workLocations = [
         console.error("error while Loading departments ",error);
       }
     })
+  }
+  cancelForm(){
+    this.employeeForm.reset();
+    this.showPopup.set(false);
   }
 
   toggleChange(event:MatSlideToggleChange){
