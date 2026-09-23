@@ -14,18 +14,18 @@
       </thead>
       <tbody>
         @for(emp of employees();track emp.id){
-          <tr>
-            <td>{{emp.id}}</td>
-            <td>{{emp.firstName}} {{emp.lastName}}</td>
-            <td>{{emp.designation}}</td>
-            <td>{{emp.email}}</td>
-            <td><button type="button" (click)="editEmployee(emp)">Edit</button></td>
-            <td><button type="button" (click)="deleteEmployee(emp)">Delete</button></td>
-          </tr>
+        <tr>
+          <td>{{emp.id}}</td>
+          <td>{{emp.firstName}} {{emp.lastName}}</td>
+          <td>{{emp.designation}}</td>
+          <td>{{emp.email}}</td>
+          <td><button type="button" (click)="editEmployee(emp)">Edit</button></td>
+          <td><button type="button" (click)="deleteEmployee(emp)">Delete</button></td>
+        </tr>
         }
       </tbody>
     </table>
-      <!-- <span>
+    <!-- <span>
         {{emp.id}}
         {{emp.firstName}}
         {{emp.lastName}}
@@ -38,105 +38,207 @@
   <br>
   <button type="button" (click)="addEmployee()">Add Employee</button>
   @if(showPopup()){
-    <div class="popup">
-      <form [formGroup]="employeeForm">
-        <input type="text" formControlName="employeeCode" placeholder="Employee Code">
-        <br>
-        <!-- personal Information -->
-
-        <input type="text" formControlName="firstName" placeholder="First Name">
-        <br>
-        <input type="text" formControlName="lastName" placeholder="Last Name">
-        <br>
-        <input type="date" formControlName="dateOfBirth" placeholder="Date Of Birth">
-        <br>
-        <select name="gender" id="gender" aria-label="Select your gender" formControlName="gender">
-          <option [ngValue]="null" disabled>Select Your Gender</option>
-          @for(gender of genders;track gender){
+  <div class="popup form-section">
+    <form [formGroup]="employeeForm">
+      <label for="employeeCode">Employee Code</label>
+      <input id="employeeCode" type="text" formControlName="employeeCode" placeholder="Employee Code">
+      <br>
+      <div class="form-section">
+        <h3>personal Information</h3>
+        <div class="form-grid">
+          <label for="firstName">First Name *</label>
+          <input id="firstName" type="text" formControlName="firstName" placeholder="First Name">
+          @if(isInvalid('firstName')){
+          @if(employeeForm.get('firstName')?.hasError('required')){
+          <small>First Name is required.</small>
+          }
+          @if(employeeForm.get('firstName')?.hasError('minLength')){
+          <small>First Name must contain at least 2 characters.</small>
+          }
+          }
+        </div>
+        <div class="form-grid">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" formControlName="lastName" placeholder="Last Name">
+        </div>
+        <div class="form-grid">
+          <label for="dateOfBirth">Date Of Birth</label>
+          <input id="dateOfBirth" type="date" formControlName="dateOfBirth" placeholder="Date Of Birth">
+        </div>
+        <div class="form-grid">
+          <label for="gender">Gender</label>
+          <select name="gender" id="gender" aria-label="Select your gender" formControlName="gender">
+            <option [ngValue]="null" disabled>Select Gender</option>
+            @for(gender of genders;track gender){
             <option [value]="gender">{{ gender }}</option>
+            }
+          </select>
+          @if (isInvalid('gender')) {
+          <small>Gender is required.</small>
           }
-        </select>
-        <br>
-        <select name="maritalStatus" id="marital-status" aria-label="Select your marital status" formControlName="maritalStatus">
-          <option [ngValue]="null" disabled>Select Your Marital Status</option>
-          @for(type of maritalStatuses;track type){
+        </div>
+        <div class="form-grid">
+          <label for="maritalStatus">Marital Status</label>
+          <select name="maritalStatus" id="maritalStatus" aria-label="Select your marital status"
+            formControlName="maritalStatus">
+            <option [ngValue]="null" disabled>Select Marital Status</option>
+            @for(type of maritalStatuses;track type){
             <option [value]="type">{{ type }}</option>
-          }
-        </select>
-        <br>
-        <select name="bloodGroup" id="blood-group" aria-label="Select your blood group" formControlName="bloodGroup">
-          <option [ngValue]="null" disabled>Select Your Blood Group</option>
-          @for(type of bloodGroups;track type){
+            }
+          </select>
+        </div>
+        <div class="form-grid">
+          <label for="bloodGroup">Blood Group</label>
+          <select name="bloodGroup" id="bloodGroup" aria-label="Select your blood group" formControlName="bloodGroup">
+            <option [ngValue]="null" disabled>Select Blood Group</option>
+            @for(type of bloodGroups;track type){
             <option [value]="type">{{ type }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-grid">
+          <label for="profilePhoto">Profile Picture</label>
+          <input id="profilePhoto" type="text" formControlName="profilePhoto" placeholder="Profile Picture">
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>contact Information</h3>
+        <div class="form-grid">
+          <label for="email">Email *</label>
+          <input id="email" type="email" formControlName="email" placeholder="Email">
+          @if(isInvalid('email')){
+          @if(this.employeeForm.get('email')?.hasError('required')){
+          <small>Email is Required.</small>
           }
-        </select>
-        <br>
-        <input type="text" formControlName="profilePhoto" placeholder="Profile Picture">
-        <br>
-
-        <!-- contact Information -->
-
-
-        <input type="email" formControlName="email" placeholder="Email">
-        <br>
-        <input type="tel" formControlName="phone" placeholder="Phone Number">
-        <br>
-        <input type="tel" formControlName="emergencyContact" placeholder="Emergency Contact Number">
-        <br>
-        <input type="text" formControlName="address" placeholder="Address">
-        <br>
-        <input type="text" formControlName="city" placeholder="City">
-        <br>
-        <input type="text" formControlName="state" placeholder="State">
-        <br>
-        <input type="text" formControlName="pincode" placeholder="Pincode">
-        <br>
-
-        <!-- proffesional Information -->
-        <select name="department" id="selectedDepartment" aria-label="Department" formControlName="departmentId">
-          <option [ngValue]="null" disabled>Select Department</option>
-          @for(dept of departments();track dept.id){
+          @if(this.employeeForm.get('email')?.hasError('email')){
+          <small>Enter a valid email address.</small>
+          }
+          }
+        </div>
+        <div class="form-grid">
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" formControlName="phone" placeholder="Phone Number">
+          @if(isInvalid('phone')){
+          <small>Phone number must contain exactly 10 numbers.</small>
+          }
+        </div>
+        <div class="form-grid">
+          <label for="emergencyContact">Emergency Contact Number</label>
+          <input id="emergencyContact" type="tel" formControlName="emergencyContact"
+            placeholder="Emergency Contact Number">
+        </div>
+        <div class="form-grid">
+          <label for="address">Address</label>
+          <input id="address" type="text" formControlName="address" placeholder="Address">
+        </div>
+        <div class="form-grid">
+          <label for="city">City</label>
+          <input id="city" type="text" formControlName="city" placeholder="City">
+        </div>
+        <div class="form-grid">
+          <label for="state">State</label>
+          <input id="state" type="text" formControlName="state" placeholder="State">
+        </div>
+        <div class="form-grid">
+          <label for="pincode">Pincode</label>
+          <input id="pincode" type="text" formControlName="pincode" placeholder="Pincode">
+          @if(isInvalid('pincode')){
+          <small>Pincode must contain exactly 6 numbers.</small>
+          }
+        </div>
+      </div>
+      <div class="form-section">
+        <h3>proffesional Information</h3>
+        <div class="form-grid">
+          <label for="selectedDepartment">Department</label>
+          <select name="department" id="selectedDepartment" aria-label="Department" formControlName="departmentId">
+            <option [ngValue]="null" disabled>Select Department</option>
+            @for(dept of departments();track dept.id){
             <option [value]="dept.id">{{dept.name}}</option>
+            }
+          </select>
+          @if(isInvalid('department')){
+          <small>Department is required.</small>
           }
-        </select>
-        <br>
-        <input type="text" formControlName="designation" placeholder="Designation">
-        <br>
-        <!-- manager dropdown -->
-        <select name="Manager" id="ManagerSelection" formControlName="managerId" aria-label="manager">
-          <option [ngValue]="null" disabled>Select Your Manager</option>
-          @for(manager of employees();track manager.id){
+        </div>
+        <div class="form-grid">
+          <label for="designation">Designation</label>
+          <input id="designation" type="text" formControlName="designation" placeholder="Designation">
+        </div>
+        <div class="form-grid">
+          <label for="ManagerSelection">Manager</label>
+          <!-- manager dropdown -->
+          <select name="Manager" id="ManagerSelection" formControlName="managerId" aria-label="manager">
+            <option [ngValue]="null" disabled>Select Manager</option>
+            @for(manager of employees();track manager.id){
             @if(manager.id!=editingEmployee()?.id){
             <option [value]="manager.id">{{manager.firstName}} {{manager.lastName}}</option>
             }
+            }
+          </select>
+        </div>
+        <div class="form-grid">
+          <label for="joiningDate">Joining Date</label>
+          <input id="joiningDate" type="date" formControlName="joiningDate" placeholder="Joining Date">
+          @if (isInvalid('joiningDate')) {
+          <small>Joining date is required.</small>
           }
-        </select>
-        <br>
-        <input type="date" formControlName="joiningDate" placeholder="Joining Date">
-        <br>
-        <input type="text" formControlName="employmentType" placeholder="Employment Type">
-        <br>
-        <input type="number" formControlName="salary" placeholder="Salary">
-        <br>
-        <select name="shift" id="shift" aria-label="Work Shift" formControlName="shift">
-          <option [ngValue]="null" disabled>Select Work Shift</option>
-          @for(shift of shifts;track shift){
+        </div>
+        <div class="form-grid">
+          <label for="employementType">Employment Type</label>
+          <select name="employment Type" id="employementType" formControlName="employmentType">
+            <option [ngValue]="null" disabled>Select Employment Type</option>
+            @for(type of employmentTypes;track type){
+            <option [ngValue]="type">{{type}}</option>
+            }
+          </select>
+          @if (isInvalid('employmentType')) {
+          <small>Employment type is required.</small>
+          }
+        </div>
+        <div class="form-grid">
+          <label for="salary">Salary</label>
+          <input id="salary" type="number" formControlName="salary" placeholder="Salary">
+          @if (isInvalid('salary')) {
+          <small>Salary cannot be negative.</small>
+          }
+        </div>
+        <div class="form-grid">
+          <label for="shift">Work Shift</label>
+          <select name="shift" id="shift" aria-label="Work Shift" formControlName="shift">
+            <option [ngValue]="null" disabled>Select Work Shift</option>
+            @for(shift of shifts;track shift){
             <option [value]="shift">{{shift}}</option>
+            }
+          </select>
+          @if (isInvalid('shift')) {
+          <small>Shift is required.</small>
           }
-        </select>
-        <br>
-        <select name="workLocation" id="workLocation" aria-label="Work Location" formControlName="workLocation">
-          <option [ngValue]="null"disabled>Select Work Location</option>
-          @for(location of workLocations;track location){
+        </div>
+        <div class="form-grid">
+          <label for="workLocation">Work Location</label>
+          <select name="workLocation" id="workLocation" aria-label="Work Location" formControlName="workLocation">
+            <option [ngValue]="null" disabled>Select Work Location</option>
+            @for(location of workLocations;track location){
             <option [value]="location">{{location}}</option>
+            }
+          </select>
+          @if(isInvalid('workLocation')){
+          <small>Work Location is required.</small>
           }
-        </select>
-        <br>
+        </div>
+      </div>
+      <div class="form-section">
+        <button type="button" (click)="cancelForm()">
+          cancel
+        </button>
         <button type="button" (click)="saveEmployee()">
           save
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
   }
 
   <mat-slide-toggle [checked]="colorMode()" (change)="toggleChange($event)"

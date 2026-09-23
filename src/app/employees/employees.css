@@ -33,7 +33,6 @@ button {
 }
 
 input {
-  width: 100%;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   background: transparent;
@@ -46,4 +45,43 @@ button {
   color: inherit;
   border: 1px solid currentColor;
   padding: 0.5rem 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background: white;
+}
+
+.form-group small {
+  margin-top: 5px;
+  font-size: 12px;
+}
+.form-grid{
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.form-grid input,select{
+  width: strech !important;
+}
+.form-section:last-child{
+  display: flex;
+  justify-content:space-around;
+  margin-top: 1rem;
 }

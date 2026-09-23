@@ -1,6 +1,7 @@
 using ERMS.API.Data;
 using ERMS.API.Models;
 using ERMS.API.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace ERMS.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class EmployeesController : ControllerBase
 {
   private readonly ApplicationDbContext _context;
